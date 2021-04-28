@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  volumes:
+    - name: object-detection-pt5n6-template-detection-dev
+      persistentVolumeClaim:
+        claimName: object-detection-pt5n6-template-detection-dev
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: objectdetection-pvc
+
